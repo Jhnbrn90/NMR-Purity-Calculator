@@ -205,7 +205,6 @@ export default {
           signal: 'CH3'
         }
       },
-
       form: {},
       selectedImpurity: 'EtOAc'
     };
