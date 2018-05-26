@@ -1,65 +1,114 @@
 <template>
-  <div class="sans-serif tracking-normal tracking-wide">
-    <p class="mb-2 text-xl">
-      Mass of product:
-        <input v-model="productMass" type="text" placeholder="123" class="border-b border-b-2 border-blue-dark w-16 text-center" autofocus>
+  <div class="sans-serif tracking-normal tracking-wide container mx-auto p-6">
+
+    <div class="w-full pt-4 pb-1">
+      <h3 class="step-heading text-center text-black mb-4 text-2xl">
+        Step 1. What is the Molecular Weight of your product?
+      </h3>
+
+      <p class="mb-2 text-xl text-grey-darkest text-center mb-6">
+        <input
+          v-model="productMass"
+          type="number"
+          placeholder="123.45"
+          class="border-b border-b-2 border-grey-darker w-24 text-center" autofocus>
         g / mol
       </p>
+    </div>
 
-      <p class="mb-8" v-if="productMass !== null && addedComponents.length > 0">
-        Purity: <span class="text-2xl text-blue">{{ productMassPercent }}</span> mass% ({{ productMolPercent }} mol%)
-      </p>
+    <div class="flex justify-center items-center" v-if="productMass !== null && addedComponents.length > 0">
+        <div class="masspercentage mr-2">
+          <div class="flex justify-center items-center h-100 rounded-full w-32 h-32 shadow-md mr-2">
+              <div class="flex items-top font-thin text-green-dark tracking-wide">
+                <div class="text-4xl">{{ productMassPercent | units }}.</div>
+                  <div class="text-lg">
+                    {{ productMassPercent | decimals }}
+                  </div>
+                </div>
+                </div>
+            <div class="text-green-dark text-center mt-2 text-lg">mass%</div>
+        </div>
 
-      <p class="mb-6">
-        The product contains the following components:
-          <ul class="list-reset justify-around mt-4">
-            <li class="mb-2" v-for="impurity in addedComponents">
-              &mdash; <strong>{{ impurity.name }}</strong> (<span class="text-grey-darkest"> &int; = {{ impurity.integral }}</span>)
-              &bull; <span class="text-lg">{{ massPercent(impurity) }}</span> mass%
-              &bull; {{ molePercent(impurity) }} mol%
+                <div class="molpercentage">
+          <div class="flex justify-center items-center h-100 rounded-full w-32 h-32 shadow-md mr-2">
+              <div class="flex items-top font-thin tracking-wide">
+                <div class="text-4xl">{{ productMolPercent | units }}.</div>
+                  <div class="text-lg">
+                    {{ productMolPercent | decimals }}
+                  </div>
+                </div>
+                </div>
+            <div class="text-lg text-center mt-2">mol%</div>
+        </div>
+
+      </div>
+
+
+       <div class="p-6 text-grey-darkest text-center" v-show="showResults">
+        <h3 class="step-heading text-2xl text-black text-center mb-4">List of impurities in sample:</h3>
+          <ul class="list-reset mt-2 text-center text-blue">
+            <li v-for="impurity in addedComponents" class="mb-4">
+              <div>&bull; <strong>{{ impurity.name }}</strong> ( &int; = {{ impurity.integral }})</div>
+              <div><span class=" underline"><span class="text-lg">{{ massPercent(impurity) }}</span> mass%</span>
+              &mdash; {{ molePercent(impurity) }} mol%</div>
             </li>
           </ul>
-      </p>
+      </div>
 
-      <p class="text-center">
-        <button @click="showModal" class="text-white bg-blue rounded px-4 py-2 hover:bg-blue-dark">Add component</button>
-      </p>
+      <div class="mb-8 -mt-4 flex justify-center py-6 border-t border-grey-light" v-show="productMass !== null">
+          <div class="flex flex-col">
+            <h3 class="step-heading text-2xl mb-3">Step 2. Add impurities</h3>
+            <center>
+              <button
+                @click="showModal"
+                class="min-w-3/5 px-2 text-xl bg-white shadow tracking-wide font-medium rounded-lg py-2 hover:text-white text-grey-darker border border-grey-darkest hover:bg-grey-darkest"
+                :disabled="productMass == null || productMass == ''" :class="productMass == null || productMass == '' ? 'opacity-50 cursor-not-allowed' : ''"
+                >&plus; Add component</button>
+                <p class="pt-2 text-blue-light text-sm tracking-tight" v-show="addedComponents.length === 1">&uparrow; If you need to add more, repeat this step &uparrow;</p>
+              </center>
+          </div>
+      </div>
 
       <modal name="add-component">
-          <div class="h-full items-center flex justify-center">
-            <div>
-              <h3 class="text-center">Add a new component</h3>
-            <div class="flex justify-center p-6">
 
-              <div class="text-center">
-                Select component:
-                <select v-model="selectedImpurity" class="border mb-6">
-                  <option v-bind:key="i" v-for="(impurity, i) in commonImpurities">{{ impurity }}</option>
-                </select>
+            <div class="h-full max-w-sm sm:max-w-md items-center flex justify-center">
+              <div>
+                <h3 class="text-center">Add an impurity</h3>
+              <div class="flex justify-center p-6">
 
-                <div v-if="selectedImpurity === 'Starting Material'">
-                  <p class="text-normal">
-                    Mass: <input v-model="form.mass" type="text" placeholder="123" class="border-b border-b-2 border-blue-dark w-12 text-center"> g / mol. <br><br>
-                    The signal represents <input v-model="form.protons" type="text" placeholder="1" class="border-b border-b-2 border-blue-dark w-6 text-center"> proton(s). <br>
-                    Integrates for <input v-model="form.integral" type="text" placeholder="0.15" class="border-b border-b-2 border-blue-dark w-10 text-center"> proton(s).
-                  </p>
+                <div class="text-center">
+                  Select impurity:
+                  <select v-model="selectedImpurity" class="border mb-6">
+                    <option v-bind:key="i" v-for="(impurity, i) in commonImpurities">{{ impurity }}</option>
+                  </select>
+
+                  <div v-if="selectedImpurity === 'Starting Material'">
+                    <p class="text-normal">
+                      Mass: <input v-model="form.mass" type="text" placeholder="123" class="border-b border-b-2 border-blue-dark w-16 text-center"> g / mol. <br><br>
+                      The signal represents <input v-model="form.protons" type="text" placeholder="1" class="border-b border-b-2 border-blue-dark w-10 text-center"> proton(s). <br><br>
+                      Integrates for <input v-model="form.integral" type="text" placeholder="0.15" class="border-b border-b-2 border-blue-dark w-12 text-center"> proton(s).
+                    </p>
+                  </div>
+
+                  <div v-else>
+                    <p class="text-normal">The <em class="font-semibold">{{ selectedPeaktype }}</em>
+                    (<span v-html="selectedSignal"></span>) integrates for
+                      <input @keydown.enter.prevent="addComponent" v-model="form.integral" type="text" placeholder="0.22" class="border-b border-b-2 border-blue-dark w-12 text-center" autofocus>
+                    proton(s).</p>
+                  </div>
+
+                  <button
+                    @click='addComponent'
+                    class="mt-8 rounded bg-blue-dark text-white py-2 px-4 w-48 hover:bg-blue"
+                    >&plus; Add component</button>
+
                 </div>
-
-                <div v-else>
-                  <p class="text-normal">The <em class="font-semibold">{{ selectedPeaktype }}</em>
-                  (<span v-html="selectedSignal"></span>) integrates for
-                    <input @enter="addComponent" v-model="form.integral" type="text" placeholder="0.22" class="border-b border-b-2 border-blue-dark w-10 text-center" required autofocus>
-                  proton(s).</p>
-                </div>
-
-                <button @click='addComponent' class="mt-8 rounded bg-green text-white py-2 px-4 w-48 hover:bg-green-dark">Add to list</button>
 
               </div>
-
+              </div>
             </div>
-            </div>
-          </div>
       </modal>
+        </div>
 
   </div>
 </template>
@@ -144,6 +193,7 @@ export default {
     protons() {
       return this.lookupImpurities[this.selectedImpurity].protons;
     },
+
     mass() {
       return this.lookupImpurities[this.selectedImpurity].mass;
     },
@@ -184,6 +234,10 @@ export default {
 
     productMolPercent() {
       return (1 / this.sumOfMolfractions * 100).toFixed(1);
+    },
+
+    showResults() {
+      return this.addedComponents.length > 0 && this.productMass !== null;
     }
   },
 
@@ -203,23 +257,30 @@ export default {
       return integral / protons;
     },
 
+    convertCommas(value) {
+      return Number(value.replace(',', '.'));
+    },
+
     addComponent() {
       let protons =
         this.selectedImpurity === 'Starting Material'
-          ? this.form.protons
+          ? this.convertCommas(this.form.protons)
           : this.protons;
 
       let mass =
         this.selectedImpurity === 'Starting Material'
-          ? this.form.mass
+          ? this.convertCommas(this.form.mass)
           : this.mass;
 
       let entry = {
         name: this.selectedImpurity,
-        integral: this.form.integral,
+        integral: Number(this.convertCommas(this.form.integral)).toFixed(2),
         protons: protons,
         mass: mass,
-        molfrac: this.molFraction(protons, this.form.integral)
+        molfrac: this.molFraction(
+          protons,
+          this.convertCommas(this.form.integral)
+        )
       };
 
       this.addedComponents.push(entry);
@@ -234,8 +295,18 @@ export default {
     massPercent(impurity) {
       let fraction = impurity.molfrac / this.sumOfMolfractions;
       let mass = fraction * impurity.mass;
-      console.log(mass);
+
       return (Number(mass / this.sumOfMolMasses) * 100).toFixed(1);
+    }
+  },
+
+  filters: {
+    decimals(value) {
+      return value.split('.')[1];
+    },
+
+    units(value) {
+      return value.split('.')[0];
     }
   }
 };
