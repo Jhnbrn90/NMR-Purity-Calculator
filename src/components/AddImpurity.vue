@@ -13,49 +13,51 @@
         </div>
     </div>
 
-    <modal name="add-impurity">
-        <div class="h-full max-w-sm sm:max-w-md items-center flex -mt-2 justify-center">
-            <div>
-                <h3 class="text-center text-2xl">Add an impurity</h3>
-                <div class="flex justify-center p-6">
 
-                    <div class="text-center">
-                        Compound:
-                        <select v-model="selectedImpurity" class="border mb-6">
-                            <option v-bind:key="i" v-for="(impurity, i) in commonImpurities">{{ impurity }}</option>
-                        </select>
 
-                        <div v-if="selectedImpurity === 'Starting Material'">
-                            <p class="text-normal">
-                                Mass:
-                                <input v-model="form.mass" type="text" placeholder="123" class="border-b border-b-2 border-blue-dark w-16 text-center"> g / mol.
-                                <br>
-                                <br> The signal represents
-                                <input v-model="form.protons" type="text" placeholder="1" class="border-b border-b-2 border-blue-dark w-10 text-center"> proton(s).
-                                <br>
-                                <br> Integrates for
-                                <input v-model="form.integral" type="text" placeholder="0.15" class="border-b border-b-2 border-blue-dark w-12 text-center"> proton(s).
-                            </p>
-                        </div>
+      <modal name="add-impurity">
+          <div class="h-full max-w-xs pt-4 sm:pt-0 sm:w-full sm:max-w-md items-center sm:flex sm:-mt-2 sm:justify-center">
+              <div>
+                  <h3 class="text-center text-2xl">Add an impurity</h3>
+                  <div class="sm:flex sm:justify-center p-6">
 
-                        <div v-else>
-                            <p class="text-normal">The
-                                <em class="font-semibold">{{ selectedPeaktype }}</em>
-                                (
-                                <span v-html="selectedSignal"></span>) integrates for
-                                <input @keydown.enter.prevent="formSubmitted" v-model="form.integral" type="text" placeholder="0.22" class="border-b border-b-2 border-blue-dark w-12 text-center"
-                                    autofocus> proton(s).
-                            </p>
-                        </div>
+                      <div class="text-center">
+                          Compound:
+                          <select v-model="selectedImpurity" class="border mb-6">
+                              <option v-bind:key="i" v-for="(impurity, i) in commonImpurities">{{ impurity }}</option>
+                          </select>
 
-                        <button @click='formSubmitted' class="mt-8 rounded-lg bg-blue-dark text-white py-2 px-4 w-48 hover:bg-blue">&plus; Add impurity</button>
+                          <div v-if="selectedImpurity === 'Starting Material'">
+                              <p class="text-normal">
+                                  Mass:
+                                  <input v-model="form.mass" type="text" placeholder="123" class="border-b border-b-2 border-blue-dark w-16 text-center"> g / mol.
+                                  <br>
+                                  <br> The signal represents
+                                  <input v-model="form.protons" type="text" placeholder="1" class="border-b border-b-2 border-blue-dark w-10 text-center"> proton(s).
+                                  <br>
+                                  <br> Integrates for
+                                  <input v-model="form.integral" type="text" placeholder="0.15" class="border-b border-b-2 border-blue-dark w-12 text-center"> proton(s).
+                              </p>
+                          </div>
 
-                    </div>
+                          <div v-else>
+                              <p class="text-normal">The
+                                  <em class="font-semibold">{{ selectedPeaktype }}</em>
+                                  (
+                                  <span v-html="selectedSignal"></span>) integrates for
+                                  <input @keydown.enter.prevent="formSubmitted" v-model="form.integral" type="text" placeholder="0.22" class="border-b border-b-2 border-blue-dark w-12 text-center"
+                                      autofocus> proton(s).
+                              </p>
+                          </div>
 
-                </div>
-            </div>
-        </div>
-    </modal>
+                          <button @click='formSubmitted' class="mt-8 rounded-lg bg-blue-dark text-white py-2 px-4 w-48 hover:bg-blue">&plus; Add impurity</button>
+
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </modal>
 </div>
 
 </template>
