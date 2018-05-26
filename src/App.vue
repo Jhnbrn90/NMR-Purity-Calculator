@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <div class="mb-8">
+      <h1 class="text-center mt-4 page-title text-5xl tracking-wide">NMR Purity Calculator</h1>
+    </div>
+
+    <div class="flex justify-center">
+      <purity-calculator />
+    </div>
+
+
+
   </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PurityCalculator from './components/PurityCalculator.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    PurityCalculator
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
