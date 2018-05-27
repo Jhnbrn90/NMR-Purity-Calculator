@@ -22,7 +22,7 @@
 
     </div>
 
-    <impurity-list :impurities="impurities" :molmass="sumOfMolMasses" :molfrac="sumOfMolfractions" />
+    <impurity-list @remove-impurity="removeItem" :impurities="impurities" :molmass="sumOfMolMasses" :molfrac="sumOfMolfractions" />
 
 </div>
 </template>
@@ -35,6 +35,12 @@ export default {
 
   components: {
     ImpurityList
+  },
+
+  methods: {
+    removeItem(i) {
+      this.$emit('remove-impurity', i);
+    }
   },
 
   computed: {
