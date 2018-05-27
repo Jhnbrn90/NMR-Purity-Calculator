@@ -5,12 +5,14 @@
     </h3>
 
     <p class="mb-2 text-xl text-grey-darkest text-center mb-6">
-        <input v-on:input="$emit('input', $event.target.value)" type="number" placeholder="123.45" class="border-b border-b border-grey-darker w-24 text-center"
+        <input v-on:input="$emit('input', $event.target.value)" :value="value" type="number" placeholder="123.45" class="border-b border-b border-grey-darker w-24 text-center"
             autofocus> g / mol
     </p>
 </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['value']
+};
 </script>
