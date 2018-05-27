@@ -1,9 +1,14 @@
 <template>
 <div class="sans-serif tracking-normal tracking-wide container mx-auto p-6">
 
-  <product-input @input="updateProductMass" />
+  <span
+  @click="reset"
+  class="block text-center mb-6 -mt-6 hover:text-blue cursor-pointer"
+  >Start over</span>
 
-  <purity-output :productMass="productMass" :impurities="addedComponents" />
+  <product-input @input="updateProductMass" :value="productMass" />
+
+  <purity-output @remove-impurity="removeItem" :productMass="productMass" :impurities="addedComponents" />
 
   <add-impurity @added-impurity="addImpurity" :impurities="addedComponents" v-show="productMass !== null" />
 
@@ -38,6 +43,15 @@ export default {
 
     addImpurity(entry) {
       this.addedComponents.push(entry);
+    },
+
+    removeItem(i) {
+      this.addedComponents.splice(i, 1);
+    },
+
+    reset() {
+      this.addedComponents = [];
+      this.productMass = null;
     }
   }
 };
