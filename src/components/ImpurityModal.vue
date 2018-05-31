@@ -135,11 +135,18 @@ export default {
           signal: 'CH2'
         },
 
-        EtOAc: {
+        'EtOAc (q)': {
           protons: 2,
           mass: 88.105,
           peakType: 'q',
           signal: 'CH2'
+        },
+
+        'EtOAc (s)': {
+          protons: 3,
+          mass: 88.105,
+          peakType: 's',
+          signal: 'CH3'
         },
 
         Hexane: {
@@ -189,10 +196,25 @@ export default {
           mass: 92.14,
           peakType: 's',
           signal: 'CH3'
-        }
+        },
+
+        Triethylamine: {
+          protons: 2,
+          mass: 101.19,
+          peakType: 'q',
+          signal: 'CH2'
+        },
+
+        TPPO: {
+          protons: 15,
+          mass: 278.28,
+          peakType: 'm',
+          'signal': 'CH'
+        },
+
       },
       form: {},
-      selectedImpurity: 'EtOAc'
+      selectedImpurity: 'EtOAc (s)'
     };
   },
 
