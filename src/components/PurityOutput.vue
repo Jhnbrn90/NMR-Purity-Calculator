@@ -24,22 +24,29 @@
 
     <impurity-list @remove-impurity="removeItem" :impurities="impurities" :molmass="sumOfMolMasses" :molfrac="sumOfMolfractions" />
 
+
+    <modal name="show-calculation" height="auto">
+      <calculation-modal :productmass="productMass" :impurities="impurities" />
+    </modal>
+
 </div>
 </template>
 
 <script>
-import ImpurityList from './ImpurityList';
+import CalculationModal from "./CalculationModal.vue";
+import ImpurityList from "./ImpurityList";
 
 export default {
-  props: ['impurities', 'productMass'],
+  props: ["impurities", "productMass"],
 
   components: {
-    ImpurityList
+    ImpurityList,
+    CalculationModal
   },
 
   methods: {
     removeItem(i) {
-      this.$emit('remove-impurity', i);
+      this.$emit("remove-impurity", i);
     }
   },
 

@@ -3,8 +3,8 @@
 
   <span
   @click="reset"
-  class="block text-center mb-6 -mt-6 hover:text-blue cursor-pointer"
-  >Start over</span>
+  class="block text-center mb-6 -mt-6 hover:underline cursor-pointer"
+  >Start over?</span>
 
   <product-input @input="updateProductMass" :value="productMass" />
 
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import ProductInput from './ProductInput';
-import PurityOutput from './PurityOutput';
-import AddImpurity from './AddImpurity';
+import ProductInput from "./ProductInput";
+import PurityOutput from "./PurityOutput";
+import AddImpurity from "./AddImpurity";
 
 export default {
-  name: 'PurityCalculator',
+  name: "PurityCalculator",
   components: {
     ProductInput,
     PurityOutput,
