@@ -177,6 +177,13 @@ export default {
           signal: 'CH3'
         },
 
+        Pyridine: {
+          protons: 1,
+          mass: 79.1,
+          peakType: 'm',
+          signal: 'CH'
+        },
+
         THF: {
           protons: 4,
           mass: 72.1,
@@ -209,9 +216,8 @@ export default {
           protons: 15,
           mass: 278.28,
           peakType: 'm',
-          'signal': 'CH'
-        },
-
+          signal: 'CH'
+        }
       },
       form: {},
       selectedImpurity: 'EtOAc (s)'
@@ -258,6 +264,9 @@ export default {
       this.$emit('added-impurity', entry);
       this.hideModal();
       this.clearForm();
+      setTimeout(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      }, 50);
     }
   },
 
