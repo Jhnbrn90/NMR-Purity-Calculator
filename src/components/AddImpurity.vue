@@ -1,8 +1,8 @@
 <template>
 <div>
-    <div class="mb-8 -mt-4 flex justify-center py-6 border-t border-grey-light">
+    <div class="mb-8 -mt-8 flex justify-center py-6 ">
         <div class="flex flex-col">
-            <h3 class="step-heading text-2xl mb-3">Step 2. Add impurities</h3>
+            <h3 class="step-heading text-2xl mb-3" v-if="impurities.length === 0">Step 2. Add impurities</h3>
             <center>
                 <button
                     @click="showModal"

@@ -6,9 +6,9 @@
       <sup class="text-red uppercase"> New</sup>
     </span>
 
-    <h3 class="step-heading mt-3 text-2xl text-grey-darkest text-center">List of impurities in sample:</h3>
+    <!-- <h3 class="step-heading mt-3 text-2xl text-grey-darkest text-center">List of impurities in sample:</h3> -->
     
-    <ul class="list-reset mt-2 text-center text-grey-darker">
+    <ul class="list-reset mt-6 text-center text-grey-darker">
       <li v-bind:key="i" v-for="(impurity, i) in impurities" class="mb-4">
         <div>
           <span class="text-2xl text-black">&rsaquo;</span> <strong class="text-base tracking wide text-black"> {{ impurity.name }}</strong> &int; = {{ impurity.integral }}
