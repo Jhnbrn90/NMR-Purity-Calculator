@@ -1,9 +1,13 @@
 <template>
   <div class="p-6 text-grey-darkest text-center" v-show="impurities.length > 0">
-    <h3 class="step-heading text-2xl text-black text-center">List of impurities in sample:</h3>
-    <span class="mb-6 text-xs">
-      (<a href="#" @click="showCalculation" class="text-grey-darkest no-underline hover:underline">show calculation?</a>)
+
+    <span class="text-xs">
+      <a @click="showCalculation" class="text-grey-darkest cursor-pointer no-underline hover:underline tracking-wide">Show calculation?</a>
+      <sup class="text-red uppercase"> New</sup>
     </span>
+
+    <h3 class="step-heading mt-3 text-2xl text-grey-darkest text-center">List of impurities in sample:</h3>
+    
     <ul class="list-reset mt-2 text-center text-grey-darker">
       <li v-bind:key="i" v-for="(impurity, i) in impurities" class="mb-4">
         <div>
@@ -22,7 +26,7 @@
 
 <script>
 export default {
-  props: ["impurities", "molmass", "molfrac"],
+  props: ['impurities', 'molmass', 'molfrac'],
 
   methods: {
     molePercent(impurity) {
@@ -37,11 +41,11 @@ export default {
     },
 
     removeItem(i) {
-      this.$emit("remove-impurity", i);
+      this.$emit('remove-impurity', i);
     },
 
     showCalculation() {
-      this.$modal.show("show-calculation");
+      this.$modal.show('show-calculation');
     }
   }
 };
