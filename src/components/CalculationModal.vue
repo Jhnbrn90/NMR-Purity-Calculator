@@ -57,7 +57,7 @@
                 <li v-for="(impurity, index) in impurities" :key="index" class="mb-4">
                     <p class="border-t border-black py-2">
                         <strong class="block">{{ impurity.name }}</strong>
-                        MW: <span class="text-grey-dark">{{ impurity.mass }}</span>,
+                        MW: <span class="text-grey-dark">{{ impurity.mass }}</span> g/mol,
                         representing <span class="text-red">{{ impurity.protons }}</span> proton(s)
                     </p>
 
