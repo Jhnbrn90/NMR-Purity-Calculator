@@ -1,13 +1,22 @@
 <template>
     <div class="w-screen sm:w-full sm:mt-2 mt-4 text-grey-darkest">
         <div class="py-1 px-3 text-center">
-            <h1 class="mb-4">Show Calculation</h1>
+            <h1>Show Calculation</h1>
+            <button @click="closeModal" class="hover:text-blue hover:underline text-sm">&times; close</button>
 
-            <p class="mb-2">
-                Formula's:
+            <p class="mt-4 mb-2">
+                <button 
+                    @click="toggleFormulas" 
+                    :title="showFormulas ? 'Hide formula\'s' : 'Show formula\'s'" 
+                    alt="Toggle formula's" 
+                    class="hover:text-blue no-underline text-lg font-semibold"
+                    display="outline: none;"
+                >
+                    {{ showFormulas ? '&minus;' : '&plus;' }} Formula's:
+                </button> 
             </p>
 
-            <div class="rounded shadow-md border px-2 md:text-sm md:flex md:flex-wrap md:items-center md:text-left mb-6">
+            <div v-if="showFormulas" class="rounded shadow-md border px-2 md:text-sm md:flex md:flex-wrap md:items-center md:text-left mb-6">
                 <div class="text-blue md:w-1/2">
                     <h4 class="inline-block">Mol frac. </h4>
 
@@ -162,6 +171,12 @@
 export default {
   props: ['productmass', 'impurities'],
 
+  data() {
+    return {
+      showFormulas: true
+    };
+  },
+
   computed: {
     sumOfFractionsMath() {
       return this.impurities
@@ -205,10 +220,31 @@ export default {
     }
   },
 
+  methods: {
+    closeModal() {
+      this.$modal.hide('show-calculation');
+    },
+
+    toggleFormulas() {
+      this.showFormulas = !this.showFormulas;
+      this.loadMathJax();
+    },
+
+    loadMathJax() {
+      this.$nextTick(function() {
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
+      });
+    }
+  },
+
   mounted() {
-    this.$nextTick(function() {
-      MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
-    });
+    this.loadMathJax();
   }
 };
 </script>
+
+<style>
+button {
+  outline: none !important;
+}
+</style>
