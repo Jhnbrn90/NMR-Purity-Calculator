@@ -7,10 +7,16 @@
                 <option v-bind:key="i" v-for="(impurity, i) in commonImpurities">{{ impurity }}</option>
             </select>
         </div>
+            <center><span class="w-1/2 md:w-full text-grey-darker block -mt-2 text-center text-xs">Add your own impurities, choose <em>Custom Input</em> &#10548;</span></center>
 
         <div
-        v-if="selectedImpurity === 'Starting Material'"
+        v-if="selectedImpurity === '=== Custom Input ==='"
         class="flex flex-col justify-center w-screen sm:w-full p-4 items-center">
+          <p class="mb-6 text-center">Define a custom input, <em>e.g.</em> your starting material.</p>
+            <div class="text-center mb-2">
+                Name: <input v-model="form.name" type="text" placeholder="1,4-Diiodobutane" class="border-b border-b-2 border-blue-dark w-48 text-center">
+            </div>
+
             <div class="text-center mb-2">
                 Mass: <input v-model="form.mass" type="number" placeholder="123.45" class="border-b border-b-2 border-blue-dark w-24 text-center"> g / mol.
             </div>
@@ -53,11 +59,6 @@ export default {
   data() {
     return {
       lookupImpurities: {
-        'Starting Material': {
-          protons: null,
-          mass: null
-        },
-
         'Acetic Acid': {
           protons: 3,
           mass: 60.05,
@@ -147,6 +148,11 @@ export default {
           mass: 88.105,
           peakType: 's',
           signal: 'CH3'
+        },
+
+        '=== Custom Input ===': {
+          protons: null,
+          mass: null
         },
 
         Hexane: {
@@ -242,17 +248,22 @@ export default {
 
     formSubmitted() {
       let protons =
-        this.selectedImpurity === 'Starting Material'
+        this.selectedImpurity === '=== Custom Input ==='
           ? this.convertCommas(this.form.protons)
           : this.protons;
 
       let mass =
-        this.selectedImpurity === 'Starting Material'
+        this.selectedImpurity === '=== Custom Input ==='
           ? this.convertCommas(this.form.mass)
           : this.mass;
 
+      let name =
+        this.selectedImpurity === '=== Custom Input ==='
+          ? this.form.name
+          : this.selectedImpurity;
+
       let entry = {
-        name: this.selectedImpurity,
+        name: name,
         integral: Number(this.convertCommas(this.form.integral)).toFixed(2),
         protons: protons,
         mass: mass,
