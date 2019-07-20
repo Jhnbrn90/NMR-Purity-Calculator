@@ -22,4 +22,4 @@ The user is also prompted to supply the integral of the found impurity.
 This project is made with VueJS and the Vue-CLI tool, available from https://vuejs.org/.
 
 ## Demo
-A running demo can be found at http://www.nmrpurity.com/
+A running demo can be found at https://www.nmrpurity.com
