@@ -7,28 +7,28 @@
                 <option v-bind:key="i" v-for="(impurity, i) in commonImpurities">{{ impurity }}</option>
             </select>
         </div>
-            <center><span class="w-1/2 md:w-full text-grey-darker block -mt-2 text-center text-xs">Add your own impurities, choose <em>Custom Input</em> &#10548;</span></center>
+            <center><span class="w-1/2 md:w-full text-gray-600 block -mt-2 text-center text-xs">Add your own impurities, choose <em>Custom Input</em> &#10548;</span></center>
 
         <div
         v-if="selectedImpurity === '=== Custom Input ==='"
         class="flex flex-col justify-center w-screen sm:w-full p-4 items-center">
           <p class="mb-6 text-center">Define a custom input, <em>e.g.</em> your starting material.</p>
             <div class="text-center mb-2">
-                Name: <input v-model="form.name" type="text" placeholder="1,4-Diiodobutane" class="border-b border-b-2 border-blue-dark w-48 text-center">
+                Name: <input v-model="form.name" type="text" placeholder="1,4-Diiodobutane" class="border-b border-b-2 border-blue-700 w-48 text-center">
             </div>
 
             <div class="text-center mb-2">
-                Mass: <input v-model="form.mass" type="number" placeholder="123.45" class="border-b border-b-2 border-blue-dark w-24 text-center"> g / mol.
+                Mass: <input v-model="form.mass" steps="any" placeholder="123.45" class="border-b border-b-2 border-blue-700 w-24 text-center"> g / mol.
             </div>
 
             <div class="text-center mb-2">
                 The signal represents
-                <input v-model="form.protons" type="number" placeholder="1" class="border-b border-b-2 border-blue-dark w-10 text-center"> proton(s).
+                <input v-model="form.protons" placeholder="1" class="border-b border-b-2 border-blue-700 w-10 text-center"> proton(s).
             </div>
 
             <div class="text-center mb-1">
                 Integrates for
-                <input v-model="form.integral" type="number" placeholder="0.15" class="border-b border-b-2 border-blue-dark w-16 text-center"> proton(s).
+                <input v-model="form.integral" placeholder="0.15" class="border-b border-b-2 border-blue-700 w-16 text-center"> proton(s).
             </div>
         </div>
 
@@ -39,16 +39,15 @@
                 <input
                     @keydown.enter.prevent="formSubmitted"
                     v-model="form.integral"
-                    type="number"
                     placeholder="0.15"
-                    class="border-b border-b-2 border-blue-dark w-16 text-center"
+                    class="border-b border-b-2 border-blue-700 w-16 text-center"
                     autofocus
                 > proton(s).
             </p>
         </div>
 
         <div class="flex justify-center mb-8">
-            <button @click='formSubmitted' class="mt-4 rounded-lg text-lg tracking-wide bg-blue-dark text-white py-2 px-4 w-48 hover:bg-blue">&plus; Add impurity</button>
+            <button @click='formSubmitted' class="mt-4 rounded-lg text-lg tracking-wide text-blue-400 py-2 px-4 w-48 hover:bg-blue-800 hover:text-white border-2 border-blue-200 focus:border-blue-400 focus:shadow-lg focus:font-bold focus:text-white focus:bg-blue-600">&plus; Add impurity</button>
         </div>
 
     </div>
@@ -225,7 +224,9 @@ export default {
           signal: 'CH'
         }
       },
-      form: {},
+      form: {
+
+      },
       selectedImpurity: 'EtOAc (s)'
     };
   },

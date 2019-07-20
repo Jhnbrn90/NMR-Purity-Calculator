@@ -4,8 +4,8 @@
         Step 1. What is the Molecular Weight of your product?
     </h3>
 
-    <p class="mb-2 text-xl text-grey-darkest text-center mb-6">
-        <input v-on:input="$emit('input', $event.target.value)" :value="value" type="number" placeholder="123.45" class="border-b border-b border-grey-darker w-24 text-center"
+    <p class="mb-2 text-xl text-gray-700 text-center mb-6">
+        <input v-on:input="$emit('input', $event.target.value)" :value="value" placeholder="123.45" class="border-b border-b border-gray-700 w-24 text-center"
             autofocus> g / mol
     </p>
 </div>

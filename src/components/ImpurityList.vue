@@ -1,22 +1,20 @@
 <template>
-  <div class="p-6 text-grey-darkest text-center" v-show="impurities.length > 0">
+  <div class="p-6 text-gray-500 text-center" v-show="impurities.length > 0">
 
     <span class="text-xs">
-      <a @click="showCalculation" class="text-grey-darkest cursor-pointer no-underline hover:underline tracking-wide">Show calculation?</a>
-      <sup class="text-red uppercase"> New</sup>
+      <a @click="showCalculation" class="text-gray-500 cursor-pointer no-underline hover:underline tracking-wide">Show calculation?</a>
     </span>
 
-    <!-- <h3 class="step-heading mt-3 text-2xl text-grey-darkest text-center">List of impurities in sample:</h3> -->
     
-    <ul class="list-reset mt-6 text-center text-grey-darker">
+    <ul class="list-reset mt-6 text-center text-gray-600">
       <li v-bind:key="i" v-for="(impurity, i) in impurities" class="mb-4">
         <div>
           <span class="text-2xl text-black">&rsaquo;</span> <strong class="text-base tracking wide text-black"> {{ impurity.name }}</strong> &int; = {{ impurity.integral }}
-          <span class="cursor-pointer text-red-darker hover:text-red-dark" @click="removeItem(i)">(remove)</span> </div>
+          <span class="cursor-pointer text-red-600 hover:text-red-500" @click="removeItem(i)">(remove)</span> </div>
         <div>
           <span class="text-sm">
-            <span class="text-lg text-green-dark">{{ massPercent(impurity) }}</span> mass%
-          &mdash; <span class="text-lg text-grey-darkest">{{ molePercent(impurity) }}</span> mol%</span></div>
+            <span class="text-lg text-green-400">{{ massPercent(impurity) }}</span> mass%
+          &mdash; <span class="text-lg text-gray-500">{{ molePercent(impurity) }}</span> mol%</span></div>
       </li>
     </ul>
 

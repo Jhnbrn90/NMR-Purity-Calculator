@@ -1,15 +1,16 @@
+
 <template>
-    <div class="w-screen sm:w-full sm:mt-2 mt-4 text-grey-darkest">
+    <div class="w-screen sm:w-full sm:mt-2 mt-4 text-gray-700">
         <div class="py-1 px-3 text-center">
             <h1>Show Calculation</h1>
-            <button @click="closeModal" class="hover:text-blue hover:underline text-sm">&times; close</button>
+            <button @click="closeModal" class="hover:text-blue-400 hover:underline text-sm">&times; close</button>
 
             <p class="mt-4 mb-2">
                 <button 
                     @click="toggleFormulas" 
                     :title="showFormulas ? 'Hide formula\'s' : 'Show formula\'s'" 
                     alt="Toggle formula's" 
-                    class="hover:text-blue no-underline text-lg font-semibold"
+                    class="hover:text-blue-400 no-underline text-lg font-semibold"
                     display="outline: none;"
                 >
                     {{ showFormulas ? '&minus;' : '&plus;' }} Formula's:
@@ -17,25 +18,25 @@
             </p>
 
             <div v-if="showFormulas" class="rounded shadow-md border px-2 md:text-sm md:flex md:flex-wrap md:items-center md:text-left mb-6">
-                <div class="text-blue md:w-1/2">
+                <div class="text-blue-400 md:w-1/2">
                     <h4 class="inline-block">Mol frac. </h4>
 
                     <p class="inline-block">$$\ =\ {observed\ integral \over represented\ protons} $$</p>
                 </div>            
 
-                <div class="text-orange md:w-1/2">
+                <div class="text-orange-400 md:w-1/2">
                     <h4 class="inline-block">Mol% </h4>  
 
                     <p class="inline-block">$$\ =\ {mol\ fraction \over sum\ of\ mol\ fractions} $$</p>
                 </div>            
 
-                <div class="text-pink md:w-1/2">
+                <div class="text-pink-400 md:w-1/2">
                     <h4 class="inline-block">Mass frac.</h4>  
 
                     <p class="inline-block">$$\ =\ {mol\% \times mol.\ weight } $$</p>
                 </div>
 
-                <div class="text-green md:w-1/2">
+                <div class="text-green-400 md:w-1/2">
                     <h4 class="inline-block">Mass%</h4>  
 
                     <p class="inline-block">$$\ =\ {mass\ fraction \over sum\ of\ mass\ fractions } $$</p>
@@ -44,21 +45,21 @@
 
             <div class="mb-3 md:flex md:justify-around">
                 <div class="mb-6">
-                    <span class="text-blue font-semibold block">Sum of mol fractions:</span> 
-                    1 (product) + {{ sumOfFractionsMath }} &equals; <span class="text-blue">{{  totalSumOfFractions.toFixed(2) }}</span>
+                    <span class="text-blue-400 font-semibold block">Sum of mol fractions:</span> 
+                    1 (product) + {{ sumOfFractionsMath }} &equals; <span class="text-blue-400">{{  totalSumOfFractions.toFixed(2) }}</span>
                 </div>
 
                 <div class="mb-2">
-                    <span class="text-pink font-semibold block">Sum of mass fractions: </span>
-                    {{ (this.productmass / this.totalSumOfFractions).toFixed(2) }} (product) + {{ sumOfMassFractionsMath }} &equals; <span class="text-pink">{{ sumOfMassFractions.toFixed(2) }}</span>
+                    <span class="text-pink-400 font-semibold block">Sum of mass fractions: </span>
+                    {{ (this.productmass / this.totalSumOfFractions).toFixed(2) }} (product) + {{ sumOfMassFractionsMath }} &equals; <span class="text-pink-400">{{ sumOfMassFractions.toFixed(2) }}</span>
                 </div>
             </div>
             
-            <div class="mb-6 border border-grey-darkest rounded py-2">
+            <div class="mb-6 border border-gray-700 rounded py-2">
                 <strong>Product mass:</strong> {{ productmass }} g/mol <br>
-                <span class="text-orange">Mol%</span> &equals; 1 / <span class="text-blue">{{ totalSumOfFractions.toFixed(2) }}</span> &equals; <span class="text-orange">{{ (1 / totalSumOfFractions).toFixed(3) *100 }} mol%</span>  <br>
-                <span class="text-pink">Mass frac.</span> &equals; <span class="text-orange">{{ (1 / totalSumOfFractions).toFixed(2) }}</span> &times; {{ productmass }} &equals; <span class="text-pink">{{ (productmass * 1 / totalSumOfFractions).toFixed(2) }}</span> <br>
-                <span class="text-green">Mass%</span> &equals; <span class="text-pink">{{ (productmass * 1 / totalSumOfFractions).toFixed(2) }}</span> / <span class="">{{ sumOfMassFractions.toFixed(2) }}</span> &equals; <span class="text-green">{{ (((productmass * 1 / totalSumOfFractions)) / sumOfMassFractions).toFixed(3) * 100 }}%</span>
+                <span class="text-orange-400">Mol%</span> &equals; 1 / <span class="text-blue-400">{{ totalSumOfFractions.toFixed(2) }}</span> &equals; <span class="text-orange-400">{{ (1 / totalSumOfFractions).toFixed(3) *100 }} mol%</span>  <br>
+                <span class="text-pink-400">Mass frac.</span> &equals; <span class="text-orange-400">{{ (1 / totalSumOfFractions).toFixed(2) }}</span> &times; {{ productmass }} &equals; <span class="text-pink-400">{{ (productmass * 1 / totalSumOfFractions).toFixed(2) }}</span> <br>
+                <span class="text-green-400">Mass%</span> &equals; <span class="text-pink-400">{{ (productmass * 1 / totalSumOfFractions).toFixed(2) }}</span> / <span class="">{{ sumOfMassFractions.toFixed(2) }}</span> &equals; <span class="text-green-400">{{ (((productmass * 1 / totalSumOfFractions)) / sumOfMassFractions).toFixed(3) * 100 }}%</span>
             </div>
         
             You've added the following impurities:
@@ -66,7 +67,7 @@
                 <li v-for="(impurity, index) in impurities" :key="index" class="mb-4">
                     <p class="border-t border-black py-2">
                         <strong class="block">{{ impurity.name }}</strong>
-                        MW: <span class="text-grey-dark">{{ impurity.mass }}</span> g/mol,
+                        MW: <span class="text-gray-500">{{ impurity.mass }}</span> g/mol,
                         representing <span class="text-red">{{ impurity.protons }}</span> proton(s)
                     </p>
 
@@ -82,57 +83,57 @@
                             {{ impurity.integral }}
                         </span> 
                         / 
-                        <span class="text-red">
+                        <span class="text-red-400">
                             {{ impurity.protons }}
                         </span> 
 
                         &equals; 
 
-                        <span class="text-blue">
+                        <span class="text-blue-400">
                             {{ (impurity.integral / impurity.protons).toFixed(2) }}
                         </span>
                     </p>
 
                     <p class="mt-1">
-                        <span class="text-orange">Mol% =</span>
+                        <span class="text-orange-400">Mol% =</span>
                         <span class="">
                             {{ (impurity.integral / impurity.protons).toFixed(2) }} 
                         </span>
                         
                         /
 
-                        <span class="text-blue">
+                        <span class="text-blue-400">
                             {{ Number(totalSumOfFractions).toFixed(2) }}
                         </span>
                         
                         &equals;
-                        <span class="text-orange">
+                        <span class="text-orange-400">
                             {{ (((impurity.integral / impurity.protons) / totalSumOfFractions) * 100).toFixed(1) }}  mol%
                         </span>
                     </p>
 
                     <p class="mt-1">
-                        <span class="text-pink">Mass frac.</span> &equals; 
+                        <span class="text-pink-400">Mass frac.</span> &equals; 
                         <span class="">
                             {{ ((impurity.integral / impurity.protons) / totalSumOfFractions).toFixed(3) }}
                         </span>
                         
                         &times;
 
-                        <span class="text-grey-dark">
+                        <span class="text-gray-500">
                             {{ impurity.mass }}
                         </span>
                         
                         &equals;
-                        <span class="text-pink">
+                        <span class="text-pink-400">
                             {{ ((((impurity.integral / impurity.protons) / totalSumOfFractions)) * impurity.mass).toFixed(2) }}
                         </span>
 
                     </p>
 
                     <p class="mt-1">
-                        <span class="text-green">Mass%</span> &equals; 
-                        <span class="text-pink">
+                        <span class="text-green-400">Mass%</span> &equals; 
+                        <span class="text-pink-400">
                             {{ ((((impurity.integral / impurity.protons) / totalSumOfFractions)) * impurity.mass).toFixed(2) }}
                         </span>
                         
@@ -143,7 +144,7 @@
                         </span>
                         
                         &equals;
-                        <span class="text-green">
+                        <span class="text-green-400">
                             {{ (((((impurity.integral / impurity.protons) / totalSumOfFractions)) * impurity.mass).toFixed(2) / sumOfMassFractions.toFixed(2) *100).toFixed(1) }}%
                         </span>
 
@@ -153,7 +154,7 @@
                 </li>
             </ul>
 
-            <div class="w-full border border border-grey-lighter"></div>
+            <div class="w-full border border border-gray-300"></div>
 
             <div class="text-xs py-4 w-3/4 mx-auto mb-1 px-2">
                 <span class="block mb-1">Disclaimer</span>
