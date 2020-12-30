@@ -5,7 +5,7 @@
       <h1 class="text-center mt-4 page-title text-4xl sm:text-5xl tracking-wide">
         NMR Purity Calculator
       </h1>
-      <center><img src="nmr_purity.gif" width="230" height="90"></center>
+      <center><img src="calculator.svg" width="230" height="90"></center>
     </div>
 
     <div class="flex justify-center">
