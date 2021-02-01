@@ -5,12 +5,12 @@
       <h1 class="text-center mt-4 page-title text-4xl sm:text-5xl tracking-wide">
         NMR Purity Calculator
       </h1>
-      <div class="flex justify-center w-full">
+      <div class="flex justify-center w-full h-56">
         <img src="calculator.svg" width="230" height="90">
       </div>
     </div>
 
-    <div class="text-center lg:mt-8 mb-12 hidden lg:block">
+    <div class="text-center sm:mt-8 mb-12 hidden lg:block">
         Download the app for
         <a
             class="hover:text-green-500 text-orange-500 font-bold underline"
