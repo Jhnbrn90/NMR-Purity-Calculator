@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="text-center sm:mt-8 mb-12 hidden lg:block">
+    <div class="text-center lg:mt-8 mb-12 hidden lg:block">
         Download the app for
         <a
             class="hover:text-green-500 text-orange-500 font-bold underline"
